@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y libaio1 \
     && echo "$ORACLE_HOME/lib" > /etc/ld.so.conf.d/oracle.conf && chmod o+r /etc/ld.so.conf.d/oracle.conf && ldconfig \
     && rm -rf /var/lib/apt/lists/* && apt-get purge -y --auto-remove curl rpm2cpio cpio
 
-RUN yum -y install graphviz
+RUN apt-get update && apt-get install -yq --no-install-recommends graphviz \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 USER $NB_USER
 
